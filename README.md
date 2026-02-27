@@ -38,7 +38,7 @@ GPU-accelerated molecular dynamics engine.
 
 Guide includes:
 - Python environment setup
-- Installing via pip (recommended)
+- Installing prerequisties via pip (recommended)
 - CUDA compatibility notes
 - Verifying GPU detection
 
