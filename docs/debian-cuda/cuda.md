@@ -40,7 +40,7 @@ lspci | grep -i vga
 
 Example output:
 
-bash```
+```bash
 01:00.0 VGA compatible controller: NVIDIA Corporation Device ...
 ```
 
