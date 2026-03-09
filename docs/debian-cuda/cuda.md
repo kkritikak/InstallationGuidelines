@@ -29,7 +29,9 @@ Always update package lists first.
 
 ```bash
 sudo apt update
-Step 2 — Check if the System Detects the GPU
+```
+
+# Step 2 — Check if the System Detects the GPU
 
 Run:
 
