@@ -149,11 +149,6 @@ lsmod | grep nvidia
 
 # Further Steps are only for if after installation it shows a black screen
 press ctrl+Alt+F5
-and then login 
-and then follow steps below
-# Further Steps are only for if after installation it shows a black screen
-
-press ctrl+Alt+F5
 and then login
 and then follow steps below
 
