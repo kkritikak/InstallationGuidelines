@@ -61,20 +61,10 @@ Example output:
 If this command fails, install the driver:
 ```bash
 sudo apt install nvidia-driver
-sudo reboot
 ```
-Then run nvidia-smi again.
+Now before rebooting your pc follow step 4.
 
-# Step 4 — Check Kernel Version
-```bash
-uname -r
-```
-Example:
-
-```bash
-6.x.x-amd64
-```
-# Step 5 — Verify Kernel Headers
+# Step 4 — Verify Kernel Headers
 
 Check installed headers:
 ```bash
@@ -96,93 +86,13 @@ Reboot if new headers were installed:
 ```bash
 sudo reboot
 ```
-# Step 6 — Verify DKMS
+Check GPU:
+```bash
+nvidia-smi
+```
+Now after rebooting if your PC shows complete black screen please follow step 9 or 10
 
-DKMS automatically builds kernel modules.
-
-Check:
-```bash
-dkms status
-```
-Check version:
-```bash
-dkms --version
-```
-Install if missing:
-```bash
-sudo apt install dkms
-```
-# Step 7 — Install Build Tools
-
-CUDA compilation requires build tools.
-
-Check:
-```bash
-dpkg -l | grep build-essential
-```
-Install if missing:
-```bash
-sudo apt install build-essential
-```
-# Step 8 — Install Firmware
-
-Check firmware packages:
-```bash
-dpkg -l | grep firmware
-```
-Install recommended firmware:
-```bash
-sudo apt install firmware-misc-nonfree
-```
-# Step 9 — Verify NVIDIA Kernel Modules
-
-Check if NVIDIA modules are loaded:
-```bash
-lsmod | grep nvidia
-```
-Expected modules:
-```bash
-nvidia
-nvidia_uvm
-nvidia_drm
-nvidia_modeset
-```
-Check driver binding:
-```bash
-lspci -nnk | grep -A3 -i nvidia
-```
-Check kernel messages:
-```bash
-sudo dmesg | grep -i nvidia
-```
-# Step 10 — Disable Nouveau Driver (Optional- don't do it)
-
-The open-source nouveau driver conflicts with NVIDIA.
-
-Check:
-```bash
-lsmod | grep nouveau
-```
-If you see output, disable it.
-
-Create a blacklist file:
-```bash
-sudo nano /etc/modprobe.d/blacklist-nouveau.conf
-```
-Add:
-```bash
-blacklist nouveau
-options nouveau modeset=0
-```
-Update initramfs:
-```bash
-sudo update-initramfs -u
-```
-Reboot:
-```bash
-sudo reboot
-```
-# Step 11 — Install CUDA Toolkit
+# Step 5 — Install CUDA Toolkit
 
 Install CUDA from Debian repositories.
 ```bash
@@ -199,7 +109,7 @@ CUDA compiler (nvcc)
 
 CUDA development tools
 
-# Step 12 — Verify CUDA Installation
+# Step 6 — Verify CUDA Installation
 
 Check CUDA compiler:
 ```bash
@@ -218,11 +128,11 @@ Expected:
 ```bash
 /usr/bin/nvcc
 ```
-# Step 13 — Reboot
+# Step 7 — Reboot
 ```bash
 sudo reboot
 ```
-# Step 14 — Final Verification
+# Step 8 — Final Verification
 
 Check GPU:
 ```bash
@@ -235,4 +145,128 @@ nvcc --version
 Check modules:
 ```bash
 lsmod | grep nvidia
+```
+
+# Further Steps are only for if after installation it shows a black screen
+press ctrl+Alt+F5
+and then login 
+and then follow steps below
+# Further Steps are only for if after installation it shows a black screen
+
+press ctrl+Alt+F5
+and then login
+and then follow steps below
+
+# Step 9
+
+First remove nvidia completely
+```bash
+uname -r
+```
+Example:
+```bash
+6.x.x-amd64
+```
+
+# Step 6 — Verify DKMS
+
+DKMS automatically builds kernel modules.
+
+Check:
+```bash
+dkms status
+```
+Check version:
+```bash
+dkms --version
+```
+
+Install if missing:
+
+sudo apt install dkms
+
+
+# Step 7 — Install Build Tools
+
+CUDA compilation requires build tools.
+
+Check:
+```bash
+dpkg -l | grep build-essential
+```
+Install if missing:
+```bash
+sudo apt install build-essential
+```
+
+# Step 8 — Install Firmware
+
+Check firmware packages:
+```bash
+dpkg -l | grep firmware
+```
+Install recommended firmware:
+```bash
+sudo apt install firmware-misc-nonfree
+```
+
+# Step 9 — Verify NVIDIA Kernel Modules
+
+Check if NVIDIA modules are loaded:
+```bash
+lsmod | grep nvidia
+```
+
+
+Expected modules:
+```bash
+nvidia
+nvidia_uvm
+nvidia_drm
+nvidia_modeset
+```
+Check driver binding:
+```bash
+lspci -nnk | grep -A3 -i nvidia
+```
+Check kernel messages:
+```bash
+sudo dmesg | grep -i nvidia
+```
+# Step 10, install the driver:
+```bash
+sudo apt install nvidia-driver
+```
+Now before rebooting your pc follow step 4.
+
+# Step 11 — Disable Nouveau Driver (Optional - don't do it)
+
+The open-source nouveau driver conflicts with NVIDIA.
+
+Check:
+```bash
+lsmod | grep nouveau
+```
+
+
+If you see output, disable it.
+
+Create a blacklist file:
+```bash
+sudo nano /etc/modprobe.d/blacklist-nouveau.conf
+```
+
+Add:
+```bash
+blacklist nouveau
+options nouveau modeset=0
+```
+
+Update initramfs:
+```bash
+sudo update-initramfs -u
+```
+Reboot:
+```bash
+sudo reboot
 ```
